@@ -1,0 +1,792 @@
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    color: #000000;
+    background-color: #111111;
+}
+a{
+    color: unset;
+    text-decoration: none;
+}
+.container{
+    width: 1000px;
+    margin: auto;
+    max-width: 900vw;
+    text-align: center;
+    padding-top: 50px;
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 100px;
+    
+}
+.listProduct .item img{
+    width: 80%;
+    box-shadow: 1px 1px 1px 2px rgba(255, 99, 71, 0.5);
+    margin-bottom: 20px;
+}
+
+.listProduct .item:hover{
+    color: #ffffff;
+    font-style:bold;
+}
+
+.listProduct .item .item-content .desc{
+
+    visibility: none;
+    position: relative;
+    opacity: 1; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; 
+    transition: 1s;
+}
+.listProduct .item:hover .item-content .desc{
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    transition-property: all;
+    transition-duration: 1s;
+    transition: transform 0.5s;
+
+}
+.listProduct{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px; /* Örnek bir maksimum genişlik belirleyin */
+    padding: 0 20px;
+    margin-top: 50px;
+}
+.listProduct .item{
+    background-color: #1f1f1f;
+    color: #eee;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+.listProduct .item h2{
+    font-weight: 500;
+    font-size: large;
+}
+.listProduct .item h2:hover{
+    font-weight: 600;
+
+}
+.listProduct .item .price{
+    letter-spacing: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 5px;
+    border-radius: 100px;
+    font-size: x-large;
+    font-family: 'Montserrat', sans-serif;
+    color: #eee;
+    font-weight: 900;
+    text-align: center;
+
+}
+.listProduct .item .price:hover{
+    color: #ff6347;
+}
+.listProduct .item .process button:nth-child(1){
+    display: inline-block;
+    
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #ff6347;
+    padding: 10px 18px;
+    font-weight: 900;
+    border: 1px solid #ff63472d;
+    border-radius: 20px;
+}
+.listProduct .item .process button:nth-child(2){
+    display: inline-block;
+
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #1f1f1f;
+    padding: 10px 18px;
+    font-weight: 900;
+    border: 1px solid #ff63472d;
+    border-radius: 20px;
+}
+.listProduct .item .process button:hover{
+    cursor: pointer;
+    box-shadow: 0px 8px 16px 0px #ff6347;
+}
+/* detail page */
+
+.detail{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    text-align: left;
+}
+.detail .image img{
+    width: 100%;
+}
+.detail .image{
+    position: relative;
+}
+.detail .image::before{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    content: '';
+    background-color: #94817733;
+    z-index: -1;
+    border-radius: 190px 100px 170px 180px;
+    left: calc(50% - 150px);
+    top: 50px;
+
+}
+.detail .name{
+    font-size: xxx-large;
+    padding: 40px 0 0 0;
+    margin: 0 0 10px 0;
+}
+.detail .buttons{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.detail .buttons button{
+    border: none;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+}
+.detail .buttons svg{
+    width: 15px;
+}
+.detail .buttons span{
+    background-color: #555454;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+.detail .buttons button:nth-child(2){
+    background-color: #2F2F2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eee;
+    box-shadow: 0 10px 20px #2F2F2F77;
+}
+.detail .description{
+    font-weight: 300;
+}
+/* // ipad */
+@media only screen and (max-width: 992px) {
+    .listProduct{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .detail{
+        grid-template-columns:  40% 1fr;
+    }
+}
+
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+    .listProduct{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .detail{
+        text-align: center;
+        grid-template-columns: 1fr;
+    }
+    .detail .image img{
+        width: unset;
+        height: 40vh;
+    } 
+    .detail .name{
+        font-size: x-large;
+        margin: 0;
+
+    }
+    .detail .buttons button{
+        font-size: small;
+    }
+    .detail .buttons{
+        justify-content: center;
+    }
+}
+
+
+
+.listProduct .item .item-content .process{
+
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 0.3s ease; 
+    transition: 1s;
+    display: flex;
+    flex-direction: column; /* Butonları dikey olarak sıralar */
+    gap: 10px;
+    text-align: center;
+    position: absolute;
+    transition: transform 0.5s;
+}
+
+.listProduct .item:hover .item-content .process{
+    position:relative;
+    visibility: visible;
+    opacity: 1;
+    text-align: center;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+.listProduct .item .item-content .process .add{
+    display: inline-block;
+
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #1f1f1f;
+    padding: 10px 18px;
+    font-weight: 900;
+    border: 1px solid #ff63472d;
+    border-radius: 20px;
+}
+
+.listProduct .item .item-content .process .purchase{
+    display: inline-block;
+    
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #ff6347;
+    padding: 10px 18px;
+    font-weight: 900;
+    border: 1px solid #ff63472d;
+    border-radius: 20px;
+}
+
+
+.listProduct .item .item-content .process .add:hover{
+    cursor: pointer;
+    box-shadow: 0px 8px 16px 0px #ff6347;
+
+}
+
+.listProduct .item .item-content .process .purchase:hover{
+    cursor: pointer;
+    box-shadow: 0px 8px 16px 0px #ff6347;
+
+}
+
+.listProduct .item .item-content .prop{
+    background-color: transparent;
+    color: #eee;
+    border-radius: 5px;
+}
+
+.listProduct .item .item-content .prop .material-symbols-outlined{
+    transform: translateY(3px);
+}
+
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 100px;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ff6347;
+    font-size: xx-large;
+    font-style: normal;
+}
+
+.play-button:hover{
+    color: #ff6347;
+    -webkit-text-stroke-color: white;
+}
+
+.cover-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.cover-container .like{
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: -90%;
+    margin-top: -5%;
+    opacity: 0;
+}
+
+.cover-container .like:hover{
+    color: #ff6347;
+    
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1f1f1f;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 100;
+}
+
+.toolbar .logo {
+    height: 100px;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.nav-links li {
+    position: relative;
+    left: -570%;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-links a:hover {
+    color: #ff6347; /* Turuncu bir vurgu rengi */
+}
+
+.nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ff6347;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.box{
+    height: 30px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0); /* Hem yatay hem dikey olarak ortala */
+    padding: 20px;
+}
+
+.box:hover input{
+    width: 400px;
+}
+
+.box:active{
+    width: 400px;
+}
+
+.box input{
+    width: 0;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+}
+
+.box a .fas{
+    color: #ff6347;
+    font-size: 18px;
+    margin-top: 20px;
+    position:static;
+
+}
+
+.search-bar {
+    position: relative;
+    width: 300px;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    padding-left: 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.fa-search {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: xx-large;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Butonlar arasına boşluk eklemek için */
+    margin-left: auto;
+    /*margin-right: 77%;*/
+    
+}
+
+.auth-buttons {
+    display: none; /* JavaScript ile duruma göre gösterilecek */
+    gap: 10px;
+}
+
+.auth-buttons .login-btn,
+.auth-buttons .signup-btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-buttons .login-btn {
+    background-color: #ff6347;
+    color: #fff;
+}
+
+.auth-buttons .signup-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.dropdown {
+    display: none; /* JavaScript ile duruma göre gösterilecek */
+    position: relative;
+    align-items: center;
+}
+
+.dropdown .dropbtn {
+    background-color: #1f1f1f;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.profile-pic {
+    width: 40px; /* Profil resminin boyutu */
+    height: 40px;
+    border-radius: 50%; /* Daire yapmak için */
+    margin-right: 10px; /* İsme boşluk bırakmak için */
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1f1f1f;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px #ff63472d;
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+
+
+
+#filterBtn{
+    position:fixed;
+    text-align: center;
+    top: 95%;
+    margin-left: 1%;
+    transform: translateY(-50%);
+    background-color: #1f1f1f;
+    color: #eee;
+    padding: 20px;
+    border-radius: 20px;
+    width: auto; /* İstediğiniz genişliği ayarlayabilirsiniz */
+    z-index: 5;
+    cursor: pointer;
+}
+
+#filterBtn:hover{
+    background-color: #ff6347;
+}
+
+#filterPanel {
+    position: fixed;
+    left: 1%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1f1f1f;
+    color: #eee;
+    padding: 20px;
+    border-radius: 20px;
+    width: 250px; /* İstediğiniz genişliği ayarlayabilirsiniz */
+    z-index: 4;
+    display: none;
+}
+
+#filterPanel h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#filterPanel div {
+    margin-bottom: 10px;
+}
+
+#filterPanel label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#filterPanel input[type="text"],
+#filterPanel input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #eee;
+    background-color: #333;
+}
+
+#filterPanel button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#filterPanel button:hover {
+    background-color: #ff634780;
+}
+
+
+/* Items tasarımı ve düzeni */
+.items-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Items ile filter panelin üstü hizalanması */
+    margin-left: 320px; /* Filter panelinden sağa doğru uzaklık */
+}
+
+.items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: transparent;
+    margin-top: 5%;
+    margin-bottom: 10%; /* Filter paneli ile arasındaki mesafe */
+}
+
+.item {
+    background-color: #1f1f1f;
+    color: #eee;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative; 
+    /* İçeriğin konumlandırılması için */
+}
+
+.item h2 {
+    font-weight: 500;
+    font-size: large;
+}
+
+.item .price {
+    letter-spacing: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 5px;
+    border-radius: 100px;
+    font-size: x-large;
+    font-family: 'Montserrat', sans-serif;
+    color: #eee;
+    font-weight: 900;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1800px) {
+    .items {
+        width: 90%; /* Eğer ekran küçükse genişliği artırabilirsiniz */
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .items-container {
+        margin-left: 0; /* Küçük ekranlarda filter paneli altta olacak, sol kenarda kalacak */
+    }
+
+    #filterPanel{
+        display: none;
+        z-index: 4;
+    }
+
+}
+
+@media only screen and (max-width: 1280px) {
+    .items {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+
+    .items-container {
+        flex-direction: column; /* Küçük ekranlarda dikey hizalama */
+        align-items: center; /* Ortalamak için */
+    }
+
+    #filterPanel{
+        display: none;
+    }
+
+
+}
+
+@media only screen and (max-width: 768px){
+    #filterPanel{
+        width: 100%;
+        height: auto;
+        text-align: center;
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, .8);
+    }
+}
+
+
+
+
+
+
+
+/* Dropdown menu */
+#artistDropdown,
+#typeDropdown,
+#tagsDropdown,
+#priceDropdown,
+#keyDropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.dropbtn {
+    background-color: #1f1f1f;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1f1f1f;
+    min-width: 200px;
+    z-index: 1;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+#artistDropdown:hover .dropdown-content,
+#typeDropdown:hover .dropdown-content,
+#tagsDropdown:hover .dropdown-content,
+#priceDropdown:hover .dropdown-content,
+#keyDropdown:hover .dropdown-content {
+    display: block;
+}
+#priceDropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #1f1f1f;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%;
+    padding: 10px;
+}
+
+#priceDropdownContent input {
+    margin: 5px 0;
+}
+
+#priceDropbtn:focus + #priceDropdownContent,
+#priceDropdownContent:hover {
+    display: block;
+}

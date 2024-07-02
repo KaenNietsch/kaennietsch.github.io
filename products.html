@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats</title>
+    <link rel="stylesheet" href="styleTest.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="footer.css">
+    <script src="search.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="product.css">
+    <style>
+        .dropdown-content { display: none; }
+        .dropdown-content button { display: block; }
+        .dropdown-content input { display: block; }
+        #SearchEvent { display: none; color: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="toolbar">
+            <img class="logo" src="des/Logo.svg">
+            <div class="box">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <a href="#" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+            <div class="menu-btn" onclick="toggleSidebar()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="sidebar" class="sidebar">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Beats</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+
+                    <div class="user-menu">
+                        <!-- Oturum açıldıysa -->
+                        <div class="dropdown">
+                            <img id="profile-pic" class="profile-pic" alt="Profil Resmi">
+                            <button class="dropbtn">Profile</button>
+                            <div class="dropdown-content">
+                                <a href="#">Profile</a>
+                                <a href="cart.html">Cart</a>
+                                <a href="favorites.html">Favorites</a>
+                                <a href="#">Log Out</a>
+                            </div>
+                        </div>
+                        <!-- Oturum açılmadıysa -->
+                        <div class="auth-buttons">
+                            <button class="login-btn">LogIn</button>
+                            <button class="signup-btn">Register</button>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <script>
+                function toggleSidebar() {
+                    const sidebar = document.getElementById("sidebar");
+                    if (sidebar.style.left === "-250px") {
+                        sidebar.style.left = "0";
+                    } else {
+                        sidebar.style.left = "-250px";
+                    }
+                }
+            </script>
+
+        </nav>
+    </header>
+
+    <div class="listProduct">
+        
+    </div>
+
+    <div class="Panel" id="Panel">
+        <style>
+            #Panel{
+                display: flex;
+            }
+
+        </style>
+
+
+
+        <div class="filterBtn" id="filterBtn">Filters</div>
+
+        <div class="filterPanel" id="filterPanel">
+            <h2>Filter</h2>
+            <div>
+                <label for="artistFilter">Artist:</label>
+                <select id="artistFilter">
+                    <option value="select">Select</option>
+                </select>
+            </div>
+            <div>
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="select">Select</option>
+                </select>
+            </div>
+            <div>
+                <label for="tagsFilter">Tags:</label>
+                <select id="tagsFilter">
+                    <option value="select">Select</option>
+                </select>
+            </div>
+            <div>
+                <label for="bpmFilter">BPM:</label>
+                <input type="number" id="bpmFilter" min="10" max="300">
+    
+            </div>
+            <div class="price-filter">
+                <label for="priceFilter">Price:</label>
+                <div>
+                    <input type="number" id="priceMin" placeholder="Min">
+                    <input type="number" id="priceMax" placeholder="Max">
+                </div>
+                <label class="free-checkbox"><input type="checkbox" id="freeCheckbox"> Free</label>
+            </div>
+            <div>
+                <label for="keyFilter">Key:</label>
+                <select id="keyFilter">
+                    <option value="select">Select</option>
+                </select>
+            </div>
+            <button id="applyFilters">Apply Filters</button>
+            <button id="resetFilters">Reset Filters</button>
+        </div>
+    </div>
+
+    <script>
+        const filterBtn = document.querySelector('.Panel .filterBtn');
+        const filterPanel = document.querySelector('.Panel .filterPanel');
+    
+        filterBtn.addEventListener('click', function(){
+            if(filterPanel.style.display === 'block'){
+                filterPanel.style.display = 'none';
+            }else{
+                filterPanel.style.display = 'block';
+            }
+        });
+    </script>
+
+    <style>
+        #filterPanel {
+
+            align-items: center;
+            background-color: #1f1f1f;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        #filterPanel h2 {
+            margin: 0 10px;
+            flex-shrink: 0;
+            width: auto;
+        }
+        
+        /* Dropdown stilleri */
+        #filterPanel select {
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border: none;
+            cursor: pointer;
+            width: 250px;
+            font-size: large;
+            border-radius: 5px;
+        }
+        
+        #filterPanel select:not(:placeholder-shown) {
+            background-color: #333;
+        }
+        
+        #filterPanel select option {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        /* BPM Slider */
+        #bpmFilter {
+            width: 150px;
+        }
+        
+        #bpmValue {
+            margin-left: 10px;
+        }
+        
+        /* Price Menüsü */
+        #priceFilter {
+            display: flex;
+            align-items: center;
+        }
+        
+        #priceFilter input[type="number"] {
+            background-color: #333;
+            color: #fff;
+
+        }
+        
+        #priceFilter label {
+            margin-left: 10px;
+        }
+        
+        #priceFilter input[type="checkbox"] {
+            margin-left: 10px;
+        }
+        
+        /* Buton stilleri */
+        #filterPanel button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #filterPanel button:hover {
+            background-color: #ff6347;
+        }
+        
+        /* Ortalama */
+
+    </style>
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('filter.json')
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown('artistFilter', data.artists);
+                    populateDropdown('typeFilter', data.types);
+                    populateDropdown('tagsFilter', data.tags);
+                    populateDropdown('keyFilter', data.keys);
+                });
+        });
+
+        function populateDropdown(id, options) {
+            const dropdown = document.getElementById(id);
+            options.forEach(option => {
+                const optElement = document.createElement('option');
+                optElement.value = option;
+                optElement.textContent = option;
+                dropdown.appendChild(optElement);
+            });
+        }
+
+
+        document.getElementById('freeCheckbox').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('priceMin').value = '0';
+                document.getElementById('priceMax').value = '0';
+                document.getElementById('priceMin').setAttribute('disabled', true);
+                document.getElementById('priceMax').setAttribute('disabled', true);
+            } else {
+                document.getElementById('priceMin').removeAttribute('disabled');
+                document.getElementById('priceMax').removeAttribute('disabled');
+            }
+        });
+
+        document.getElementById('applyFilters').addEventListener('click', applyFilters);
+        document.getElementById('resetFilters').addEventListener('click', resetFilters);
+
+        function applyFilters() {
+            const artistFilter = document.getElementById('artistFilter').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+            const tagsFilter = document.getElementById('tagsFilter').value.toLowerCase();
+            const bpmFilter = document.getElementById('bpmFilter').value;
+            const priceMin = document.getElementById('priceMin').value;
+            const priceMax = document.getElementById('priceMax').value;
+            const keyFilter = document.getElementById('keyFilter').value.toLowerCase();
+
+            const products = document.querySelectorAll('.item');
+            products.forEach(product => {
+                const artist = product.dataset.artist.toLowerCase();
+                const type = product.dataset.type.toLowerCase();
+                const tags = product.dataset.tags.toLowerCase();
+                const bpm = product.dataset.bpm;
+                const price = product.dataset.price;
+                const key = product.dataset.key.toLowerCase();
+
+                if (
+                    (artistFilter === 'select' || artist.includes(artistFilter)) &&
+                    (typeFilter === 'select' || type.includes(typeFilter)) &&
+                    (tagsFilter === 'select' || tags.includes(tagsFilter)) &&
+                    (bpmFilter === '' || bpm == bpmFilter) &&
+                    (priceMin === '' || price >= priceMin) &&
+                    (priceMax === '' || price <= priceMax) &&
+                    (keyFilter === 'select' || key.includes(keyFilter))
+                ) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById('artistFilter').value = 'select';
+            document.getElementById('typeFilter').value = 'select';
+            document.getElementById('tagsFilter').value = 'select';
+            document.getElementById('bpmFilter').value = 'select';
+            document.getElementById('priceMin').value = '';
+            document.getElementById('priceMax').value = '';
+            document.getElementById('keyFilter').value = 'select';
+            document.getElementById('bpmValue').textContent = 'select';
+            document.getElementById('freeCheckbox').checked = false;
+            document.getElementById('priceMin').removeAttribute('disabled');
+            document.getElementById('priceMax').removeAttribute('disabled');
+        }
+    </script>
+
+    <script id="beats.js">
+        let products = null;
+        let currentMusic = null; // Şu anda çalan müzik için global değişken
+        let currentPlayBtn = null; // Şu anda aktif olan play butonu
+
+        // JSON dosyasından verileri al
+        const initApp = () => {
+            fetch('products.json')
+                .then(response => response.json())
+                .then(data => {
+                    products = data;
+                    addDataToHTML();
+                });
+        }
+        initApp();
+
+
+
+        function addDataToHTML() {
+            let listProductHTML = document.querySelector('.listProduct');
+
+            // HTML'deki mevcut ürünleri temizle
+            listProductHTML.innerHTML = '';
+
+            // Verileri ekleyin
+            if (products != null) {
+                products.forEach(product => {
+
+                    let netPrice = 0;
+
+                    if(product.price === 0){
+                        netPrice = 'Free';
+                    }
+                    else{
+                        netPrice = product.price;
+                    }
+
+                    let newProduct = document.createElement('a');
+                    // newProduct.href = '/detail.html?id=' + product.id;
+                    newProduct.classList.add('item');
+                    newProduct.dataset.artist = product.artist;
+                    newProduct.dataset.type = product.type;
+                    newProduct.dataset.tags = product.tags;
+                    newProduct.dataset.bpm = product.bpm;
+                    newProduct.dataset.price = product.price;
+                    newProduct.dataset.key = product.key;
+                    newProduct.innerHTML = `
+                        <div class="item-content">
+                            <div class="cover-container">
+                                <h1 class="like">&#9825;</h1>
+                                <img src="${product.image}" alt=""> <!-- product.image -->
+                                <i class="play-button" title="Play" data-sound="${product.sound}">▶</i> <!-- Play button -->
+                            </div>
+                            <h2 data-id="${product.id}">${product.name}</h2> <!-- product.name -->
+                            <h2 class="prop"> 
+                                <span class="material-symbols-outlined">
+                                    music_note
+                                </span>
+                                ${product.key} 
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+                                ${product.bpm + ' BPM'}</h2>
+                            <h2 id="Artist">
+                                <span class="material-symbols-outlined">
+                                    artist
+                                </span>
+                                ${product.artist}</h2>
+                            <style>
+                                #Artist{
+                                    margin-top:5%;
+                                }
+                                #Artist .material-symbols-outlined{
+                                    transform: translateY(3px);
+                                }
+                            </style>
+                            <div class="price">$${netPrice}</div>
+                            <div class="process">
+                                <button class="purchase">Purchase</button> <!-- purchase -->
+                                <button id="add" class="add">Add To Cart</button> <!-- add to cart -->
+                            </div>
+                            <div class="desc">${product.desc}</div>
+                        </div>
+                    `;
+
+                    function addToCart(prod) {
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        cart.push(prod);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        alert(`${prod.name} Added to Cart!`);
+                    }
+
+                    function like(prod) {
+                        let fav = JSON.parse(localStorage.getItem('favorites')) || [];
+                        fav.push(prod);
+                        localStorage.setItem('favorites', JSON.stringify(fav));
+                        alert(`${prod.name} Added to Favorites!`);
+                    }
+
+                    function dontLike(prod) {
+                        let fav = JSON.parse(localStorage.getItem('favorites')) || [];
+                        fav.splice(index, 1);
+                        localStorage.setItem('favorites', JSON.stringify(fav));
+                        alert(`${prod.name} Deleted from favorites!`);
+                    }
+
+                    const addButton = newProduct.querySelector('.process .add');
+                    addButton.addEventListener('click', () => {
+                        addToCart(product);
+                        displayCart();
+                    });
+
+                    newProduct.querySelector('h1').addEventListener('click', function() {
+                        var inner = newProduct.querySelector('h1').innerText === '♡';
+                        if (inner) {
+                            like(product);
+                            display();
+                        } else {
+                            dontLike(newProduct);
+                            display();
+                        }
+                    });
+
+                    display();
+                    function display() {
+                        let fav = JSON.parse(localStorage.getItem('favorites')) || [];
+                        const likeButton = newProduct.querySelector('h1');
+
+                        if (fav.some(item => item.id === product.id)) {
+                            likeButton.innerHTML = '&#10084;'; // ❤️
+                            likeButton.style.color = '#ff6347'; // Kırmızı renk
+                        }
+                        else {
+                            likeButton.innerHTML = '&#9825;'; // ♡
+                            likeButton.style.color = '';
+                        }
+                    }
+
+                    displayCart();
+                    function displayCart() {
+                        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                        if (cart.some(item => item.id === product.id)) {
+                            addButton.innerHTML = 'Added';
+
+                        }
+                        else {
+                            addButton.innerHTML = 'Add To Cart';
+                        }
+                    }
+
+                    let h2Element = newProduct.querySelector('h2');
+                    h2Element.addEventListener('click', function() {
+                        window.location.href = '/detail.html?id=' + product.id;
+                    });
+                    h2Element.style.cursor = 'pointer';
+
+                    newProduct.querySelector('span').style.backgroundColor = '#eee';
+                    newProduct.querySelector('span').style.color = '#1f1f1f';
+                    newProduct.querySelector('span').style.borderRadius = '2000px';
+
+                    // Ürün üzerine hover olduğunda arka plan resmini değiştirme
+                    newProduct.addEventListener('mouseenter', function() {
+                        newProduct.style.transition = 'background-image 1s';
+                        newProduct.style.backgroundImage = `url("${product.bg}")`;
+
+                        newProduct.querySelector('.like').style.opacity = '1';
+                        newProduct.querySelector('.like').style.transition = 'opacity 1s';
+
+                    });
+
+                    newProduct.addEventListener('mouseleave', function() {
+                        newProduct.style.transition = 'background-image 0.5s';
+                        newProduct.style.backgroundImage = 'none';
+
+                        newProduct.querySelector('.like').style.opacity = '0';
+                        newProduct.querySelector('.like').style.transition = 'opacity 1s';
+
+                    });
+
+                    listProductHTML.appendChild(newProduct);
+
+                    // Player kodları
+                    const playBtn = newProduct.querySelector('.item-content .play-button');
+                    const music = new Audio(product.sound);
+
+                    function togglePlay() {
+                        if (currentMusic && currentMusic !== music) {
+                            currentMusic.pause();
+                            currentMusic.currentTime = 0; // Çalan müziği durdur ve başa sar
+                            currentPlayBtn.textContent = '▶'; // Önceki buton simgesini değiştir
+                            currentPlayBtn.setAttribute('title', 'Play');
+                        }
+
+                        if (music.paused) {
+                            playMusic(music, playBtn);
+                        } else {
+                            pauseMusic(music, playBtn);
+                        }
+                    }
+
+                    function playMusic(music, playBtn) {
+                        currentMusic = music;
+                        currentPlayBtn = playBtn;
+                        music.play();
+                        playBtn.textContent = '❚❚'; // Pause icon
+                        playBtn.setAttribute('title', 'Pause');
+                    }
+
+                    function pauseMusic(music, playBtn) {
+                        music.pause();
+                        playBtn.textContent = '▶'; // Play icon
+                        playBtn.setAttribute('title', 'Play');
+                    }
+
+                    playBtn.addEventListener('click', togglePlay);
+                });
+            }
+        }
+
+
+    </script>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="#">about us</a></li>
+                        <li><a href="#">contact</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">shipping</a></li>
+                        <li><a href="#">order status</a></li>
+                        <li><a href="#">payment options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

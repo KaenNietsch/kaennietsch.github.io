@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="title">Cart</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="styleTest.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+
+    <!--<style>
+        body {
+            background-color: #111111;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-top: 5%;
+        }
+        #cart {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background-color: transparent;
+        }
+        #cartItems {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cartItems li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cartItems li img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        #cartItems li button {
+            background-color: #ff6347;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    -->
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="des/Logo.ico">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+    <header>
+        <nav class="toolbar">
+            <img class="logo" src="des/Logo.svg">
+            
+            <div class="box">
+                <input type="text" placeholder="Search...">
+                <a href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+            <div class="user-menu">
+                <!-- Oturum açıldıysa -->
+
+                <div class="dropdown">
+                    <img id="profile-pic" class="profile-pic" alt="Profil Resmi">
+                    <button class="dropbtn">Profile</button>
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="cart.html">Cart</a>
+                        <a href="favorites.html">Favorites</a>
+                        <a href="#">Log Out</a>
+                    </div>
+                </div>
+                <!-- Oturum açılmadıysa -->
+                <div class="auth-buttons">
+                    <button class="login-btn">LogIn</button>
+                    <button class="signup-btn">Register</button>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Beats</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <script src="account.js"></script>
+
+
+
+
+
+    <h1>Cart</h1>
+    <div id="cart">
+        <ul id="cartItems">
+        </ul>
+        <p id="emptyCartMessage" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M465-613v-123H341v-60h124v-123h60v123h123v60H525v123h-60ZM289.79-80Q260-80 239-101.21t-21-51Q218-182 239.21-203t51-21Q320-224 341-202.79t21 51Q362-122 340.79-101t-51 21Zm404 0Q664-80 643-101.21t-21-51Q622-182 643.21-203t51-21Q724-224 745-202.79t21 51Q766-122 744.79-101t-51 21ZM62-820v-60h116l170 364h287.71L796-796h67L701-493q-11 19-28.56 30.5T634-451H331l-56 104h491v60H284q-37.66 0-57.33-30T224-378l64-118-148-324H62Z"/></svg>
+            Your cart is empty.</p>
+        <div id="panel" class="panel">
+            <h2>Summary</h2>
+            <p>Total items: <span id="totalItems"></span></p>
+            <p>Total cost: <span id="totalCost"></span></p>
+            <button id="checkoutButton">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+        });
+
+        function displayCart() {
+            const cartItems = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const panel = document.getElementById('panel');
+            cartItems.innerHTML = '';
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                panel.style.display = 'none';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                panel.style.display = 'block';
+                cart.forEach((product, index) => {
+                    //const listItem = document.createElement('li');
+                    //listItem.textContent = item.name;
+
+                    //const cover = document.createElement('img');
+                    //cover.src = item.image;
+
+
+                    let newProduct = document.createElement('a');
+                    //newProduct.href = '/detail.html?id=' + product.id;
+                    newProduct.classList.add('item');
+                    newProduct.innerHTML = `
+                        <div class="item-content">
+                            <div class="cover-container">
+                                <img src="${product.image}" alt=""> <!-- product.image -->
+                            </div>
+                            <h2 data-id="${product.id}">${product.name}</h2> <!-- product.name -->
+                            <h2 class="prop"> 
+                                <span class="material-symbols-outlined">
+                                    music_note
+                                </span>
+                                ${product.key} 
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+                                ${product.bpm + ' BPM'}</h2>
+                                <h2 id="Artist">
+                                    <span class="material-symbols-outlined">
+                                        artist
+                                    </span>
+                                    ${product.artist}
+                                </h2>
+                    <style>
+                        #Artist{
+                            margin-top:5%;
+                        }
+                        #Artist .material-symbols-outlined{
+                            transform: translateY(3px);
+                        }
+                    </style>
+                            <div class="price">$${product.price}</div>
+                            <div class="process">
+                                <button class="remove"></button>
+                            </div>
+                            <div class="desc">${product.desc}</div>
+                        </div>
+                    `;
+        
+
+
+                    function calculateTotalCost(products) {
+                        let totalCost = 0;
+                        products.forEach(product => {
+                            totalCost += product.price;
+                        });
+                        return totalCost;
+                    }
+                    
+                    // Toplam maliyeti ve ürün sayısını güncelleyen fonksiyon
+                    function updateSummary(products) {
+                        const totalItems = products.length;
+                        const totalCost = calculateTotalCost(products);
+                    
+                        document.getElementById('totalItems').textContent = totalItems;
+                        document.getElementById('totalCost').textContent = totalCost;
+                    }
+                    
+                    // Örneğin, ürün listesini ve toplam özetini güncelleyin (örnektir, gerçek verilerinize göre ayarlayın)
+                    updateSummary(cart);
+                    
+                    // Çıkış işlemini dinleyen fonksiyon
+                    document.getElementById('checkoutButton').addEventListener('click', function() {
+                        alert('Checkout clicked! Total cost: ' + document.getElementById('totalCost').textContent);
+                    });
+
+
+
+
+
+
+
+
+                    const removeButton = newProduct.querySelector('.process .remove');
+                    removeButton.textContent = 'Remove';
+                    removeButton.onclick = function() {
+                        removeFromCart(index);
+                    };
+
+
+                    //listItem.appendChild(removeButton);
+                    //listItem.appendChild(cover);
+                    //cartItems.appendChild(listItem);
+
+
+
+
+        
+        
+                    let h2Element = newProduct.querySelector('h2');
+                    h2Element.addEventListener('click', function() {
+                        window.location.href = '/detail.html?id=' + product.id;
+                    });
+                    h2Element.style.cursor = 'pointer';
+        
+        
+                    newProduct.addEventListener('mouseenter', function() {
+                        newProduct.style.transition = 'background-image 1s';
+                        newProduct.style.backgroundImage = `url("${product.bg}")`;
+        
+                        newProduct.querySelector('.like').style.opacity = '1';
+                        newProduct.querySelector('.like').style.transition = 'opacity 1s';
+                        newProduct.querySelector('h2').style.backgroundColor = '#ff6347';
+                        newProduct.querySelector('h2').style.borderRadius = '5px';
+                    });
+        
+                    newProduct.addEventListener('mouseleave', function() {
+                        newProduct.style.transition = 'background-image 0.5s';
+                        newProduct.style.backgroundImage = 'none';
+        
+                        newProduct.querySelector('.like').style.opacity = '0';
+                        newProduct.querySelector('.like').style.transition = 'opacity 1s';
+                        newProduct.querySelector('h2').style.transition = 'background-color 1s';
+                        newProduct.querySelector('h2').style.backgroundColor = 'transparent';
+                    });
+                    cartItems.appendChild(newProduct);
+                });
+                
+            }
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+
+    </script>
+
+</body>
+</html>

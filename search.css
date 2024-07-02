@@ -1,0 +1,15 @@
+#SearchEvent {
+    text-align: center;
+    font-size: x-large;
+    margin: 10% auto;
+    align-items: center;
+    color: #fff;
+}
+
+#SearchEvent svg{
+    width: 300px; /* İstediğiniz genişlik */
+    height: 300px; /* İstediğiniz yükseklik */
+    display: block; /* SVG'yi blok eleman yapar */
+    margin: -5% auto 100px; /* Üstten -30%, alttan 100px, yanlardan otomatik */
+    text-align: center;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Toolbar with Sidebar</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navlinks {
+            display: flex;
+            gap: 15px;
+        }
+        .navlinks a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .create-btn {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .menu-btn div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            display: block;
+        }
+        .sidebar input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        .sidebar .create-btn {
+            display: block;
+            margin: 10px 15px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .navlinks {
+                display: none;
+            }
+            .menu-btn {
+                display: flex;
+            }
+            .sidebar {
+                display: block;
+            }
+        }
+        @media (max-width: 480px) {
+            .create-btn {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            .profile img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        @media (min-width: 769px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <div class="logo">Logo</div>
+    <div class="navlinks">
+        <a href="#">Home</a>
+        <a href="#">Beats</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="profile">
+        <button class="create-btn">Create</button>
+        <span>Nickname</span>
+        <img src="profile.jpg" alt="Profile Picture">
+    </div>
+    <div class="menu-btn" onclick="toggleSidebar()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+    <input type="text" placeholder="    ...">
+    <button class="create-btn">Create</button>
+    <a href="#">Home</a>
+    <a href="#">Beats</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        if (sidebar.style.left === "-250px") {
+            sidebar.style.left = "0";
+        } else {
+            sidebar.style.left = "-250px";
+        }
+    }
+</script>
+
+</body>
+</html>

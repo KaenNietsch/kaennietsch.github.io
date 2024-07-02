@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="title">Cart</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+
+    <!--<style>
+        body {
+            background-color: #111111;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-top: 5%;
+        }
+        #cart {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background-color: transparent;
+        }
+        #cartItems {
+            list-style-type: none;
+            padding: 0;
+        }
+        #cartItems li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cartItems li img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        #cartItems li button {
+            background-color: #ff6347;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    -->
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="des/Logo.ico">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+    <header>
+        <nav class="toolbar">
+            <img class="logo" src="des/Logo.svg">
+            
+            <div class="box">
+                <input type="text" placeholder="Search...">
+                <a href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+            <div class="user-menu">
+                <!-- Oturum açıldıysa -->
+
+                <div class="dropdown">
+                    <img id="profile-pic" class="profile-pic" alt="Profil Resmi">
+                    <button class="dropbtn">Profile</button>
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="cart.html">Cart</a>
+                        <a href="favorites.html">Favorites</a>
+                        <a href="#">Log Out</a>
+                    </div>
+                </div>
+                <!-- Oturum açılmadıysa -->
+                <div class="auth-buttons">
+                    <button class="login-btn">LogIn</button>
+                    <button class="signup-btn">Register</button>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Beats</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <script src="account.js"></script>
+
+
+
+
+
+    <h1>Favorites</h1>
+    <div id="cart">
+        <ul id="cartItems">
+        </ul>
+        <p id="emptyCartMessage" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M481-84Q346-220 266.5-303t-121-137.5Q104-495 92-533.82q-12-38.82-12-86.6Q80-712 144-776q64-64 156-64 45 0 87 16.5t75 47.5l-62 216h121l-46 383 127-423H480l71-212q25-14 52.5-21t56.5-7q92 0 156 64t64 156q0 46.12-11.5 84.56Q857-497 816-442T696-304q-79 83-215 220Zm-60-144 32-272H320l73-254q-22-11-45-18.5t-48-7.5q-66.29 0-113.14 46.86Q140-686.29 140-620q0 32.67 12.5 65.33Q165-522 196.5-478t86 103.5Q337-315 421-228Zm136-18q140-136 201.5-223.5T820-620.37Q820-686 773.14-733 726.29-780 660-780q-15.33 0-30.67 3-15.33 3-29.33 8l-36 109h117L557-246Zm124-414ZM320-500Z"/></svg>
+            You haven't liked anything...
+        </p>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayFavorites();
+        });
+
+        function displayFavorites() {
+            const favoriteItems = document.getElementById('cartItems');
+            const emptyFavoritesMessage = document.getElementById('emptyCartMessage');
+            favoriteItems.innerHTML = '';
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (favorites.length === 0) {
+                emptyFavoritesMessage.style.display = 'block';
+            } else {
+                emptyFavoritesMessage.style.display = 'none';
+                favorites.forEach((product, index) => {
+                    let newFavorite = document.createElement('a');
+                    newFavorite.classList.add('item');
+                    newFavorite.innerHTML = `
+                        <div class="item-content">
+                            <div class="cover-container">
+                                <img src="${product.image}" alt="">
+                            </div>
+                            <h2 data-id="${product.id}">${product.name}</h2>
+                            <h2 class="prop"> 
+                                <span class="material-symbols-outlined">
+                                    music_note
+                                </span>
+                                ${product.key} 
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+                                ${product.bpm + ' BPM'}</h2>
+                                <h2 id="Artist">
+                                    <span class="material-symbols-outlined">
+                                        artist
+                                    </span>
+                                    ${product.artist}
+                                </h2>
+                                                    <style>
+
+                        #Artist .material-symbols-outlined{
+                            transform: translateY(3px);
+                        }
+                    </style>
+                            <div class="price">$${product.price}</div>
+                            <div class="process">
+                                <button class="remove"></button>
+                            </div>
+                            <div class="desc">${product.desc}</div>
+                        </div>
+                    `;
+
+                    const removeButton = newFavorite.querySelector('.process .remove');
+                    removeButton.textContent = 'Remove';
+                    removeButton.onclick = function() {
+                        removeFromFavorites(index);
+                    };
+
+
+                    let h2Element = newFavorite.querySelector('h2');
+                    h2Element.addEventListener('click', function() {
+                        window.location.href = '/detail.html?id=' + product.id;
+                    });
+                    h2Element.style.cursor = 'pointer';
+        
+        
+                    newFavorite.addEventListener('mouseenter', function() {
+                        newFavorite.style.transition = 'background-image 1s';
+                        newFavorite.style.backgroundImage = `url("${product.bg}")`;
+        
+
+                        newFavorite.querySelector('h2').style.borderRadius = '5px';
+                    });
+        
+                    newFavorite.addEventListener('mouseleave', function() {
+                        newFavorite.style.transition = 'background-image 0.5s';
+                        newFavorite.style.backgroundImage = 'none';
+
+                    });
+
+                    favoriteItems.appendChild(newFavorite);
+                });
+            }
+        }
+
+        function removeFromFavorites(index) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            favorites.splice(index, 1);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            displayFavorites();
+        }
+
+
+
+    </script>
+
+</body>
+</html>

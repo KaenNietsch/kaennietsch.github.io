@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Toolbar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #111111;
+            color: #fff;
+        }
+
+        a {
+            color: unset;
+            text-decoration: none;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #2c2c2c, #3a3a3a, #484848);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            position: relative;
+        }
+
+        .toolbar .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+            justify-content: flex-start;
+        }
+
+        .nav-links li {
+            margin: 0 10px;
+        }
+
+        .nav-links a {
+            color: #eee;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1f1f1f;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #eee;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .auth-buttons {
+            display: flex;
+        }
+
+        .login-btn, .signup-btn, .create-btn {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background-color: #1f1f1f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .login-btn:hover, .signup-btn:hover, .create-btn:hover {
+            box-shadow: 0 0 10px #ff6347;
+            background: #1f1f1f;
+            position: relative;
+        }
+
+        .login-btn:hover::after, .signup-btn:hover::after, .create-btn:hover::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 120%;
+            height: 120%;
+            background: #ff6347;
+            border-radius: 50%;
+            opacity: 0.2;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Mobile menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background-color: #1f1f1f;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px);
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .mobile-menu a {
+            color: #eee;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .mobile-menu .create-btn {
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        .mobile-menu .create-btn:hover {
+            background: linear-gradient(90deg, #ff6347, #f5f5dc, #98ff98);
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .user-menu, .create-btn {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo {
+                margin: auto;
+            }
+
+            .toolbar {
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu {
+                display: none;
+            }
+
+            .create-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <div class="logo"><img src="des/Logo.svg" alt="Site Logo"></div>
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Beats</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="user-menu">
+            <div class="dropdown">
+                <img id="profile-pic" class="profile-pic" src="" alt="Profil Resmi">
+                <button class="dropbtn">Profile</button>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="cart.html">Cart</a>
+                    <a href="favorites.html">Favorites</a>
+                    <a href="#">Log Out</a>
+                </div>
+            </div>
+            <div class="auth-buttons">
+                <button class="login-btn">LogIn</button>
+                <button class="signup-btn">Register</button>
+            </div>
+        </div>
+        <button class="create-btn">Create</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Beats</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button class="create-btn">Create</button>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.style.display === 'flex') {
+                mobileMenu.style.display = 'none';
+            } else {
+                mobileMenu.style.display = 'flex';
+            }
+        }
+
+        // Assuming a function to get profile picture index exists
+        function getProfilePictureIndex() {
+            return 1; // For example, replace with actual logic
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const profilePic = document.getElementById('profile-pic');
+            const profileIndex = getProfilePictureIndex();
+            profilePic.src = `Accounts/PP's/${profileIndex}.jpg`;
+        });
+    </script>
+</body>
+</html>
